@@ -17,7 +17,9 @@ var foot=parseInt(document.getElementById("foot").value);
 var inch=parseInt(document.getElementById("inch").value);
 var cm =document.getElementById("cen").value;
 var weight=document.getElementById("weight").value;
-if (age!='' && cm!='' && weight!='') {
+if (age!='' && cm!='' && weight!='' && age!='') {
+
+document.getElementById("alert1").innerHTML = "";
 if (wtype=="pounds")
 {weight=parseInt(weight);
 weight=Math.round(weight/2.2046);
@@ -122,9 +124,15 @@ document.getElementById("l1").innerHTML="kilogram";
 document.getElementById("l2").innerHTML="kilogram";
 document.getElementById("l3").innerHTML="kilogram";
 }
+
+document.getElementById("o1").innerHTML = "NA/" + cneed;
+document.getElementById("o2").innerHTML = "NA/" + pneed;
+document.getElementById("o3").innerHTML = "NA/" + fneed;
+document.getElementById("o4").innerHTML = "NA/" + crneed;
 }
 else{
-alert("Please fill your details properly!");
+  document.getElementById("alert1").innerHTML = "Kindly fill all the fields";
+  return false;
 }
 }
 function con(num)
@@ -236,13 +244,19 @@ document.getElementById("l2").innerHTML="kilogram";
 document.getElementById("l3").innerHTML="kilogram";
 document.getElementById("l4").innerHTML="kilogram";
 }
+
+document.getElementById("o1").innerHTML = "NA/" + cneed;
+document.getElementById("o2").innerHTML = "NA/" + pneed;
+document.getElementById("o3").innerHTML = "NA/" + fneed;
+document.getElementById("o4").innerHTML = "NA/" + crneed;
 }
 else{
-alert("Please fill all details properly!");
+document.getElementById("alert1").innerHTML = "Kindly fill all the fields";
+return false;
 }
 }
 
-function add(){
+function addRem(){
 
   var text = document.getElementById('item').value;
   var cal  =  parseInt(document.getElementById("cal").value);
@@ -250,10 +264,19 @@ function add(){
   var carb = parseInt(document.getElementById("carb").value);
   var prot = parseInt(document.getElementById("prot").value);
 
-  if(text == '')
+  if(isNaN(cneed)==true)
   {
-    alert("Please fill all details properly!");
+    document.getElementById("alert2").innerHTML = "Kindly fill the above table first.";
     return false;
+  }
+  if(text == '' || cal == '' || fat == '' || carb== '' || prot == '')
+  {
+    document.getElementById("alert2").innerHTML = "Kindly fill the below fields";
+    return false;
+  }
+  else
+  {
+    document.getElementById("alert2").innerHTML = "";
   }
 
   totcal=totcal+cal;
@@ -269,208 +292,108 @@ function add(){
 
   var table = document.getElementById("totals");
 
-  var rowCountChk = table.rows.length-1;
-  var cell1 = table.rows[rowCountChk].cells[0].innerHTML;
+  var rowCount = table.rows.length;
 
-  if(cell1=="Totals")
-  {
-    var rowCount = rowCountChk;
-  }
-  else
-  {
-    var rowCount = table.rows.length;
-  }
-
-	var row = table.insertRow(rowCount);
+  var row = table.insertRow(rowCount);
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
+  var cell6 = row.insertCell(5);
   cell1.innerHTML=text;
   cell2.innerHTML=cal;
   cell3.innerHTML=fat;
   cell4.innerHTML=carb;
   cell5.innerHTML=prot;
-}
+  cell6.innerHTML="Remove";
 
-function remove(){
+  document.getElementById("o1").innerHTML = totcal + "/" + cneed;
+  document.getElementById("o2").innerHTML = totprot + "/" + pneed;
+  document.getElementById("o3").innerHTML = totfat + "/" + fneed;
+  document.getElementById("o4").innerHTML = totcarb + "/" + crneed;
 
-  var table = document.getElementById("totals");
-  var rowCountChk = table.rows.length-1;
-  var cell = table.rows[rowCountChk].cells[0].innerHTML;
+  if (totcal > cneed) {
+      document.getElementById("WarningCal").innerHTML = "Exceeded Required Calorie Count";
+      var Wcolor = document.getElementById("o1");
+      Wcolor.style.color = 'red';
 
-  if(cell=="Item:")
-  {
-    alert("There are no values to remove");
-    return false;
   }
-  if(rowCountChk==1)
-  {
-    alert("There are no values to remove");
-    return false;
+  if (totprot > pneed) {
+      document.getElementById("WarningPro").innerHTML = "Exceeded Required Protien Consumption";
+      var Wcolor = document.getElementById("o2");
+      Wcolor.style.color = 'red';
+
+
   }
-  if(cell=="Totals")
-  {
-    var rowCount = rowCountChk - 1;
+  if (totfat > fneed) {
+      document.getElementById("WarningFat").innerHTML = "Exceeded Required Fat Consumption";
+      var Wcolor = document.getElementById("o3");
+      Wcolor.style.color = 'red';
+
   }
-  else
-  {
-    var rowCount = rowCountChk;
-  }
+  if (totcarb > crneed) {
+      document.getElementById("WarningCarb").innerHTML = "Excceded Required Carbohydrate Consumption";
+      var Wcolor = document.getElementById("o4");
+      Wcolor.style.color = 'red';
 
-  var cell1 = parseInt(table.rows[rowCount].cells[1].innerHTML);
-  var cell2 = parseInt(table.rows[rowCount].cells[2].innerHTML);
-  var cell3 = parseInt(table.rows[rowCount].cells[3].innerHTML);
-  var cell4 = parseInt(table.rows[rowCount].cells[4].innerHTML);
-
-  totcal=totcal-cell1;
-  totfat=totfat-cell2;
-  totcarb=totcarb-cell3;
-  totprot=totprot-cell4;
-
-  table.deleteRow(rowCount);
-}
-
-function total(){
-
-  var table = document.getElementById("totals");
-  var rowCount = table.rows.length-1;
-  var cell = table.rows[rowCount].cells[0].innerHTML;
-
-  if(cell=="Item:")
-  {
-    alert("Input values first");
-    return false;
-  }
-  if(rowCount == 1 && cell=="Totals")
-  {
-    alert("Input values first");
-  }
-  if(cell=="Totals")
-  {
-    table.rows[rowCount].cells[1].innerHTML = " "+totcal;
-    table.rows[rowCount].cells[2].innerHTML = " "+totfat;
-    table.rows[rowCount].cells[3].innerHTML = " "+totcarb;
-    table.rows[rowCount].cells[4].innerHTML = " "+totprot;
-  }
-  else
-  {
-    var str = "Totals";
-    var rowCount = table.rows.length
-  	var row = table.insertRow(rowCount);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    cell1.innerHTML=str;
-    cell2.innerHTML=totcal;
-    cell3.innerHTML=totfat;
-    cell4.innerHTML=totcarb;
-    cell5.innerHTML=totprot;
-  }
-}
-
-function check(){
-
-  var str1;
-  var str2;
-  var str3;
-  var str4;
-
-  var tablechk = document.getElementById("totals");
-  var rowCountchk = tablechk.rows.length;
-
-  if(rowCountchk == 1)
-  {
-    alert("Input values first");
-    return false;
-  }
-  if(isNaN(cneed)==true)
-  {
-    alert("Kindly fill the above box to proceed");
-    return false;
   }
 
-  var table = document.getElementById("check");
+  var index,table = document.getElementById("totals");
   var rowCount = table.rows.length;
 
-  if(rowCount != 0)
-  {
-    for(var i=(rowCount-1);i>=0;i--)
-    {
-      table.deleteRow(i);
-    }
-  }
 
-  if(totcal>cneed)
-  {
-    str1="You have exceeded the daily calorie requirements.";
-  }
-  else if(totcal==cneed)
-  {
-    str1="You have met the daily calorie requirements. Good Job!"
-  }
-  else
-  {
-     str1="You haven't reached the daily calorie requirement."
-  }
+            for(var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].cells[5].onclick = function()
+                {
+                        index = this.parentElement.rowIndex;
 
-  if(totfat>fneed)
-  {
-    str2="You have exceeded the daily fat requirements.";
-  }
-  else if(totfat==fneed)
-  {
-    str2="You have met the daily fat requirements. Good Job!"
-  }
-  else
-  {
-     str2="You haven't reached the daily fat requirement."
-  }
+                        var cells = table.rows.item(index).cells;
 
-  if(totcarb>crneed)
-  {
-    str3="You have exceeded the daily carb requirements.";
-  }
-  else if(totcarb==crneed)
-  {
-    str3="You have met the daily carb requirements. Good Job!"
-  }
-  else
-  {
-     str3="You haven't reached the daily carb requirement."
-  }
+                        var tcal = cells.item(1).innerHTML;
+                        var tpro = cells.item(4).innerHTML;
+                        var tfat = cells.item(2).innerHTML;
+                        var tcarb = cells.item(3).innerHTML;
+                        totcal -= tcal;
+                        totprot -= tpro;
+                        totfat -= tfat;
+                        totcarb -= tcarb;
+                        document.getElementById("o1").innerHTML = totcal + "/" + cneed;
+                        document.getElementById("o2").innerHTML = totprot + "/" + pneed;
+                        document.getElementById("o3").innerHTML = totfat + "/" + fneed;
+                        document.getElementById("o4").innerHTML = totcarb + "/" + crneed;
 
-  if(totprot>pneed)
-  {
-    str4="You have exceeded the daily protein requirements.";
-  }
-  else if(totprot==pneed)
-  {
-    str4="You have met the daily protein requirements. Good Job!"
-  }
-  else
-  {
-     str4="You haven't reached the daily protein requirement."
-  }
+                        table.deleteRow(index);
 
-	var row1 = table.insertRow(0);
-  var cell1 = row1.insertCell(0);
-  cell1.innerHTML=str1;
+                        if (totcal <= cneed) {
+                            document.getElementById("WarningCal").innerHTML = " "
+                            var Wcolor = document.getElementById("o1");
+                            Wcolor.style.color = 'green';
 
-  var row2 = table.insertRow(1);
-  var cell2 = row2.insertCell(0);
-  cell2.innerHTML=str2;
-
-  var row3 = table.insertRow(2);
-  var cell3 = row3.insertCell(0);
-  cell3.innerHTML=str3;
-
-  var row4 = table.insertRow(3);
-  var cell4 = row4.insertCell(0);
-  cell4.innerHTML=str4;
+                        }
+                        if (totprot <= pneed) {
+                            document.getElementById("WarningPro").innerHTML = " "
+                            var Wcolor = document.getElementById("o2");
+                            Wcolor.style.color = 'green';
 
 
+                        }
+                        if (totfat <= fneed) {
+                            document.getElementById("WarningFat").innerHTML = " "
+                            var Wcolor = document.getElementById("o3");
+                            Wcolor.style.color = 'green';
+
+                        }
+                        if (totcarb <= crneed) {
+                            document.getElementById("WarningCarb").innerHTML = " "
+                            var Wcolor = document.getElementById("o4");
+                            Wcolor.style.color = 'green';
+
+                        }
+
+
+                };
+
+            }
 }
