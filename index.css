@@ -91,8 +91,8 @@ header a:hover{
   margin-bottom:20px;
 }
 
-#body p{
-  font-size:20px;
+p.Warning{
+  font-size:12px;
 }
 
 #body2{
@@ -122,6 +122,23 @@ header a:hover{
   text-align: center;
 }
 
+span.a {
+
+    text-align: center;
+    width: 20%;
+    height: 5vh;
+    margin-top: 3vw;
+}
+
+b {
+    font-size: 18px;
+}
+
+strong {
+    font-size: 20px;
+    color: #00cc00
+}
+
 footer{
   padding:20px;
   margin-top:0;
@@ -129,6 +146,13 @@ footer{
   background-color:#00cc00;
   text-align: center;
 }
+
+#totals td:last-child{
+                         cursor: pointer;
+                         font-weight: bold;
+                         text-decoration: underline;
+                         text-align:center;
+                     }
 
 .green_button{
                 background: none repeat scroll 0 0 #00e600;
