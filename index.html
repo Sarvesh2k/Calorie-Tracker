@@ -96,8 +96,10 @@
                                                     <span id="dumdiv" align="center" style=" font-size: 10px;color: #dadada;"></span>
                                               </td>
                                           </tr>
+                                              <p style="color: #e22f2f" id="alert1"></p>
                                     </table>
                                 </form><br>
+
 
 
                                   <table align="center" border="0" class="frms noborders">
@@ -131,6 +133,7 @@
                                                             <td style="color: #3D366F; font-size:13px;"><input type="text" id="rh" style="font-size:13px;" size="10" readonly></td>
                                                             <td><font color="#3D366F" size="2" style='float:right'><label id="l3"></label> per day</font></td>
                                                         </tr>
+
                                                   </table>
                                </td>
                           </tr>
@@ -155,7 +158,8 @@
                           <td align=center>
                                 <form name="frm" action="" class='frms noborders'>
                                     <table>
-                                    <caption>Note: Add all values in grams and make sure the above table is filled</caption>
+                                    <p style="color: #e22f2f" id="alert2"></p>
+                                    <caption>Note: Add all values in grams</caption>
                                           <tr>
 
                                               <td align="center" style="color: #3D366F; font-size:13px;">Item:</td>
@@ -178,22 +182,10 @@
                                               <td><input type="text" name="prot" id="prot" align="center"></td>
                                           </tr>
 
-                                               <td align="center">
-                                                    <input class='green_button' type="button" value="Add" onclick="add()">
+                                               <td align="center" colspan=2>
+                                                    <input class='green_button' type="button" value="Add" onclick="addRem()">
                                                     <span id="dumdiv" align="center" style=" font-size: 10px;color: #dadada;"></span>
                                               </td>
-                                              <td align="center">
-                                                   <input class='green_button' type="button" value="Remove" onclick="remove()">
-                                                   <span id="dumdiv" align="center" style=" font-size: 10px;color: #dadada;"></span>
-                                             </td>
-                                             <td align="center">
-                                                  <input class='green_button' type="button" value="Total" onclick="total()">
-                                                  <span id="dumdiv" align="center" style=" font-size: 10px;color: #dadada;"></span>
-                                            </td>
-                                            <td align="center">
-                                                 <input class='green_button' type="button" value="Check" onclick="check()">
-                                                 <span id="dumdiv" align="center" style=" font-size: 10px;color: #dadada;"></span>
-                                           </td>
 
                                           </tr>
                                     </table>
@@ -206,14 +198,24 @@
                                               <th style="color: #3D366F; font-size:13px;">Fat:</th>
                                               <th style="color: #3D366F; font-size:13px;">Carbs:</th>
                                               <th style="color: #3D366F; font-size:13px;">Protein:</th>
+                                              <th style="color: #3D366F; font-size:13px;">Delete</th>
                                          </tr>
 
-                                    </table>
-                                    <br>
+                                    </table><br>
 
-                                    <table border=0 cellspacing='10' cellpadding='0' style="width:100%;" id="check">
+                                    <span class="a"><b>Calories: </b><strong id="o1">NA/NA</strong>
+                                        <p class="Warning" id="WarningCal"></p>
+                                    </span><br>
+                                    <span class="a"><b>Protien: </b><strong id="o2">NA/NA</strong><br>
+                                        <p class="Warning" id="WarningPro"></p>
+                                    </span><br>
+                                    <span class="a"><b>Fat: </b><strong id="o3">NA/NA</strong><br>
+                                        <p class="Warning" id="WarningFat"></p>
+                                    </span><br>
+                                    <span class="a"><b>Carbs: </b><strong id="o4">NA/NA</strong><br>
+                                        <p class="Warning" id="WarningCarb"></p>
+                                    </span><br>
 
-                                    </table>
 
                                </td>
                           </tr>
