@@ -8,6 +8,11 @@ var totfat = 0;
 var totcarb = 0;
 var totprot = 0;
 
+if (!localStorage.getItem('age')) {} else {
+    document.getElementById('age').value = localStorage.getItem('age');
+    document.getElementById('cen').value = localStorage.getItem('height');
+    document.getElementById('weight').value = localStorage.getItem('weight');
+}
 
 function cc()
 {
@@ -17,7 +22,11 @@ var foot=parseInt(document.getElementById("foot").value);
 var inch=parseInt(document.getElementById("inch").value);
 var cm =document.getElementById("cen").value;
 var weight=document.getElementById("weight").value;
-if (age!='' && cm!='' && weight!='' && age!='') {
+if (age!='' && cm!='' && weight!='') {
+
+  if (document.getElementById("Save").checked == true) {
+      StoreLocal(age, weight, cm);
+  }
 
 document.getElementById("alert1").innerHTML = "";
 if (wtype=="pounds")
@@ -134,7 +143,9 @@ else{
   document.getElementById("alert1").innerHTML = "Kindly fill all the fields";
   return false;
 }
+
 }
+
 function con(num)
 {
 var hc=parseInt(num.value);
@@ -256,6 +267,12 @@ return false;
 }
 }
 
+function StoreLocal(age, weight, cm) {
+    localStorage.setItem('age', age);
+    localStorage.setItem('weight', weight);
+    localStorage.setItem('height', cm);
+}
+
 function addRem(){
 
   var text = document.getElementById('item').value;
@@ -320,7 +337,7 @@ function addRem(){
 
   }
   if (totprot > pneed) {
-      document.getElementById("WarningPro").innerHTML = "Exceeded Required Protien Consumption";
+      document.getElementById("WarningPro").innerHTML = "Exceeded Required Protein Consumption";
       var Wcolor = document.getElementById("o2");
       Wcolor.style.color = 'red';
 
