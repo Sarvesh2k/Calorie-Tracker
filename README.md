@@ -1,4 +1,4 @@
-# Calorie_Tracker
+# Calorie Tracker WebApp
 
 Simple Calorie Tracker Implemented using HTML, CSS and Javascript. The Code is imported from my old Github Account "Sarvesh1908" 
 
